@@ -12,6 +12,7 @@ export interface IProduct {
 }
 
 function generateId() {
+  console.log('Entered ProductService generateId function');
   return Math.floor(Math.random() * 1000);
 }
 
@@ -112,7 +113,7 @@ export class ProductService {
 
   products$ = new BehaviorSubject<IProduct[]>(this.products);
 
-  // constructor() {
-  //   console.log('Entered ProductService constructor');
-  // }
+  constructor() {
+    console.log('Entered ProductService constructor');
+  }
 }
