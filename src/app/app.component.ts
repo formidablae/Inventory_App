@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'inventory-app';
+
+  constructor() {
+    console.log('Entered AppComponent constructor');
+  }
 }
