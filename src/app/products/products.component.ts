@@ -1,13 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { IProduct, ProductService } from '../product.service';
 
 @Component({
   selector: 'in-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss']
+  styleUrls: ['./products.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsComponent implements OnInit {
+  products$: Observable<IProduct[] | any> = this.productService.products$! as Observable<IProduct[]>;
 
-  constructor() {
+  constructor(private productService: ProductService) {
     console.log('Entered ProductsComponent constructor');
   }
 
@@ -15,4 +19,8 @@ export class ProductsComponent implements OnInit {
     console.log('Entered ProductsComponent ngOnInit function');
   }
 
+  trackById(index: any, item: IProduct): number {
+    console.log('Entered ProductsComponent trackById function');
+    return item.id;
+  }
 }
