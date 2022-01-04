@@ -1,1 +1,21 @@
-<p>products works!</p>
+<h1>Products</h1>
+<clr-datagrid>
+  <clr-dg-column clrDgField="name">Name</clr-dg-column>
+  <clr-dg-column>Expiration Date</clr-dg-column>
+  <clr-dg-column clrDgField="active">Active</clr-dg-column>
+  <clr-dg-row *clrDgItems="let product of products$ | async; trackBy trackById" [clrDgItem]="product">
+    <clr-dg-cell>{{ product.name }}</clr-dg-cell>
+    <clr-dg-cell>{{ product.expirationDate | date: 'medium' }}</clr-dg-cell>
+    <clr-dg-cell>
+      <span class="label" [ngClass]="{'label-success': product.active, 'label-danger': !product.active}">
+        {{ product.active ? 'Active' : 'Inactive' }}
+      </span>
+    </clr-dg-cell>
+  </clr-dg-row>
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="10">
+      <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50]">Products per page</clr-dg-page-size>
+      {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} of {{ pagination.totalItems }} products
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
